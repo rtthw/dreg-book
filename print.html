@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quickstart.html"><strong aria-hidden="true">2.</strong> Quickstart</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quickstart.html"><strong aria-hidden="true">2.</strong> Quickstart</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="examples/index.html"><strong aria-hidden="true">3.</strong> Examples</a></li><li class="chapter-item expanded "><a href="concepts/index.html"><strong aria-hidden="true">4.</strong> Concepts</a></li><li class="chapter-item expanded "><a href="recipes/index.html"><strong aria-hidden="true">5.</strong> Recipes</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="spacer"></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -175,23 +175,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Dreg is a terminal user interface (TUI) library designed to act more like a toolkit than a framework.</p>
+<h2 id="how-to-read-this-book"><a class="header" href="#how-to-read-this-book">How to read this book</a></h2>
+<p>If you learn best by looking at examples, start with the <a href="quickstart.html">quickstart guide</a> or take a look through the <a href="examples/index.html">examples</a> and <a href="recipes/index.html">recipes</a>.</p>
+<p>Alternatively, you can check out the <a href="concepts/index.html">concepts overview</a> for a guide on design patterns and tricks to employ with the library.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quickstart"><a class="header" href="#quickstart">Quickstart</a></h1>
-<pre><pre class="playground"><code class="language-rust">use dreg::prelude::*;
-
-fn main() {
-    let mut term = Terminal::new(std::io::stdout(), TerminalSettings::default()).unwrap();
-    let mut prog = MyProgram {
-        should_quit: false,
-    };
-    while !prog.should_quit {
-        term.render_on_input(std::time::Duration::from_millis(31), |frame| {
-            frame.render_with_context(&amp;mut prog, frame.size())
-        }).unwrap();
-    }
-    term.release().unwrap();
-}
-
-struct MyProgram {
+<p>The following is a simple example showcasing some of Dreg's features.</p>
+<h2 id="step-1-set-up-your-program"><a class="header" href="#step-1-set-up-your-program">Step 1: Set up your program</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct MyProgram {
     should_quit: bool,
 }
 
@@ -227,7 +220,26 @@ impl Program for MyProgram {
         ).render(bottom_area, buf);
     }
 }
-</code></pre></pre>
+
+<span class="boring">}</span></code></pre></pre>
+<h2 id="step-2-run-your-program"><a class="header" href="#step-2-run-your-program">Step 2: Run your program</a></h2>
+<pre><pre class="playground"><code class="language-rust">use dreg::prelude::*;
+
+fn main() {
+    let mut term = Terminal::new(std::io::stdout(), TerminalSettings::default()).unwrap();
+    let mut prog = MyProgram {
+        should_quit: false,
+    };
+    while !prog.should_quit {
+        term.render_on_input(std::time::Duration::from_millis(31), |frame| {
+            frame.render_with_context(&amp;mut prog, frame.size())
+        }).unwrap();
+    }
+    term.release().unwrap();
+}</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="examples"><a class="header" href="#examples">Examples</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="concepts"><a class="header" href="#concepts">Concepts</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="recipes"><a class="header" href="#recipes">Recipes</a></h1>
 
                     </main>
 
