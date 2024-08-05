@@ -1,21 +1,10 @@
 # Quickstart
 
+The following is a simple example showcasing some of Dreg's features.
+
+## Step 1: Set up your program
+
 ```rust
-use dreg::prelude::*;
-
-fn main() {
-    let mut term = Terminal::new(std::io::stdout(), TerminalSettings::default()).unwrap();
-    let mut prog = MyProgram {
-        should_quit: false,
-    };
-    while !prog.should_quit {
-        term.render_on_input(std::time::Duration::from_millis(31), |frame| {
-            frame.render_with_context(&mut prog, frame.size())
-        }).unwrap();
-    }
-    term.release().unwrap();
-}
-
 struct MyProgram {
     should_quit: bool,
 }
@@ -53,4 +42,23 @@ impl Program for MyProgram {
     }
 }
 
+```
+
+## Step 2: Run your program
+
+```rust
+use dreg::prelude::*;
+
+fn main() {
+    let mut term = Terminal::new(std::io::stdout(), TerminalSettings::default()).unwrap();
+    let mut prog = MyProgram {
+        should_quit: false,
+    };
+    while !prog.should_quit {
+        term.render_on_input(std::time::Duration::from_millis(31), |frame| {
+            frame.render_with_context(&mut prog, frame.size())
+        }).unwrap();
+    }
+    term.release().unwrap();
+}
 ```
